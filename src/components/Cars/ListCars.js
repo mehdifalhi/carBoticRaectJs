@@ -8,9 +8,9 @@ export default function ListCars(props) {
     const prixRef = useRef()
     const modelRef = useRef()
 
-    const editCar =(id,carUrl,marqueCar,prixCar,modelCar)=>{
+    const editCar =(carUrl,marqueCar,prixCar,modelCar,id)=>{
 
-      alert(carUrl+" "+marqueCar+" "+prixCar+" "+modelCar)
+    //  alert(carUrl+" "+marqueCar+" "+prixCar+" "+modelCar)
         urlRef.current.value = carUrl
         marqRef.current.value = marqueCar
         prixRef.current.value = prixCar
@@ -23,6 +23,7 @@ export default function ListCars(props) {
     }
     return (
         <div>
+            
              <div className="d-flex flex-wrap" >       
              {props.listCars.map(car => ( <  Cars 
                                             key={car.id}

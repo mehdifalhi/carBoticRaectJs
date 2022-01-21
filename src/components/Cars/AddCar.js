@@ -17,7 +17,7 @@ export default function AddCar(props) {
         let prixValue = prixref.current.value;
         let modelValue  = modelref.current.value;
 
-        if(urlValue === ''||marqueValue === ''|| prixValue === ''||modelValue==='') alert("remple les champs !!!")
+        if(urlValue === ''|| marqueValue === '' || prixValue === ''|| modelValue==='' ) alert("remple les champs !!!")
         else{
             urlref.current.value = "";
             marqueref.current.value = "";
@@ -46,7 +46,7 @@ export default function AddCar(props) {
                                     ref={urlref}  required />
                                 <div className="valid-feedback">
                                     good!
-                                </div>
+                                    </div>
                             </div>
                             <div className="mb-3">
                                 <label htmlFor="exampleFormControlTextarea1" className="form-label">la marque de voiture</label>

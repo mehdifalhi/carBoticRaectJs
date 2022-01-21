@@ -17,8 +17,7 @@ export default function Cars(props) {
             props.carUrl,
             props.marqueCar,
             props.prixCar,
-            props.modelCar,
-            props.id)
+            props.modelCar,props.id)
  }
  
     return (
