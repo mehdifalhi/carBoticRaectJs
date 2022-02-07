@@ -1,7 +1,10 @@
 import React, { useRef} from 'react'
+import { useDispatch } from 'react-redux'
+import { useSelector } from "react-redux"
+import { addCar } from '../../redux/ducks/cars'
 
 
-export default function AddCar(props) {
+export default function AddCar() {
     
 
    // const closeRefBtn = useRef()
@@ -9,6 +12,13 @@ export default function AddCar(props) {
     const marqueref = useRef()
     const prixref = useRef()
     const modelref = useRef()
+
+      //use dispatch hook to call the reducer's actions
+      const dispatch = useDispatch()
+      //get todo state from the store 
+      const cars = useSelector(
+          (StateStore)=>StateStore.car
+      )
 
     const onHandelSbmuit = () => {
 
@@ -23,8 +33,14 @@ export default function AddCar(props) {
             marqueref.current.value = "";
             prixref.current.value = "";
             modelref.current.value = "";
+
+            dispatch(
+                addCar(
+                    cars.length + 1,urlValue,marqueValue,prixValue,modelValue
+                )
+            )
             
-            props.addCar(urlValue,marqueValue,prixValue,modelValue)
+           // props.addCar(urlValue,marqueValue,prixValue,modelValue)
         }
     }
 

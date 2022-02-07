@@ -1,38 +1,64 @@
 import React, { useRef, useState } from 'react'
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { delCar, editCars } from '../../redux/ducks/cars';
 import Cars from './Cars'
-export default function ListCars(props) {
-  const [selectedId, setSelectedId] = useState()
+import { Car } from "../../models/car"
+
+export default function ListCars() {
+  const [selectedId, setSelectedId] = useState(0)
+  //use dispatch hook to call the reducer's actions
+  const dispatch = useDispatch()
+  //get todo state from the store 
+  const cars = useSelector(
+      (StateStore)=>StateStore.car
+  )
+
 
     const urlRef = useRef()
     const marqRef = useRef()
     const prixRef = useRef()
     const modelRef = useRef()
 
-    const editCar =(carUrl,marqueCar,prixCar,modelCar,id)=>{
+    const editCar =(carUrl,marqueCar,prixCar,modelCar ,id)=>{
 
     //  alert(carUrl+" "+marqueCar+" "+prixCar+" "+modelCar)
+        setSelectedId(id)
         urlRef.current.value = carUrl
         marqRef.current.value = marqueCar
         prixRef.current.value = prixCar
         modelRef.current.value = modelCar
-         setSelectedId(id)
+       
+    }
+    const handleDelete = (deletedId) => {
+        dispatch(delCar(deletedId))
     }
     const handleClickUpdate = ()=>{
-       
-        props.updateCar(urlRef.current.value,marqRef.current.value, prixRef.current.value, modelRef.current.value, selectedId)
+
+        dispatch(
+            editCars(
+                new Car( selectedId,
+                    urlRef.current.value,
+                    marqRef.current.value, 
+                    prixRef.current.value, 
+                    modelRef.current.value)
+               
+            )
+        )
+ 
     }
     return (
         <div>
             
              <div className="d-flex flex-wrap" >       
-             {props.listCars.map(car => ( <  Cars 
+             {cars.map(car => ( <  Cars 
                                             key={car.id}
                                             id={car.id}
                                             carUrl={car.carUrl}
                                             marqueCar= {car.marqueCar}
                                             prixCar= {car.prixCar}
                                             modelCar= {car.modelCar}
-                                            deleteCarById ={props.deleteCarById}
+                                            deleteCarById ={handleDelete}
                                             editCar={editCar}
              /> ))}
                
